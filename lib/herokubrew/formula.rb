@@ -58,7 +58,7 @@ class HerokuBrew::Formula
       end
       run("curl --silent -L '#{url}' | #{tar}")
       Dir.chdir(self.class.base_dir) do
-        self.class.patches.each do |patch|
+        (self.class.patches || []).each do |patch|
           run("curl --silent -L #{patch} | patch -p1")
         end
         install
