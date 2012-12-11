@@ -6,6 +6,6 @@ class Ruby193P327Falcon < HerokuBrew::Formula
 
   def install
     run "autoconf"
-    autoconf(["--disable-install-doc"])
+    autoconf(["--disable-install-doc", "--enable-shared", "--with-opt-dir=/app/.brew"])
   end
 end
