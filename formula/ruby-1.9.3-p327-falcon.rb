@@ -6,6 +6,6 @@ class Ruby193P327Falcon < HerokuBrew::Formula
 
   def install
     run "autoconf"
-    autoconf
+    autoconf(["--disable-install-doc"])
   end
 end
