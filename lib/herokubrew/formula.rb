@@ -3,11 +3,16 @@ class HerokuBrew::Formula
   attr_reader :prefix
 
   class << self
-    attr_reader :dependencies, :fetch_url, :base_dir
+    attr_reader :dependencies, :fetch_url, :base_dir, :patches
 
     def depends(name)
       @dependencies ||= []
       @dependencies << name
+    end
+
+    def patch(url)
+      @patches ||= []
+      @patches << url
     end
 
     def url(fetch_url)
@@ -53,6 +58,9 @@ class HerokuBrew::Formula
       end
       run("curl --silent -L '#{url}' | #{tar}")
       Dir.chdir(self.class.base_dir) do
+        self.class.patches.each do |patch|
+          run("curl --silent -L #{patch} | patch -p1")
+        end
         install
       end
     end
