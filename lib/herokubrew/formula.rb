@@ -41,10 +41,15 @@ class HerokuBrew::Formula
   end
 
   def install
-    run("./configure --prefix=#{prefix}")
+    autoconf
+  end
+
+  def autoconf(options=[])
+    options = options.join(" ")
+    run("./configure --prefix=#{prefix} #{options}")
     run("make")
     run("make install")
-  end
+  end    
   
   def build
     dir = Dir.mktmpdir
