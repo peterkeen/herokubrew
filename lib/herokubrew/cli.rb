@@ -1,6 +1,7 @@
 require 'thor'
 require 'tmpdir'
 require 'aws/s3'
+require 'digest/sha1'
 
 class HerokuBrew::CLI < Thor
 
@@ -40,8 +41,14 @@ class HerokuBrew::CLI < Thor
       :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY']
     )
 
+    shasum = File.open(filename) do |f|
+      Digest::SHA1.hexdigest(f.read)
+    end
+
+    archive_filename = "#{formula}.#{shasum}.tar.bz2"
+
     AWS::S3::S3Object.store(
-      filename,
+      archive_filename,
       File.open(filename),
       ENV['AMAZON_BUCKET'],
       :content_type => 'application/x-bzip2',
