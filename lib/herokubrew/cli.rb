@@ -7,7 +7,7 @@ class HerokuBrew::CLI < Thor
 
   include HerokuBrew::Run
 
-  option :prefix, :type => :string, :default => '.brew'
+  option :prefix, :type => :string, :default => '/app/.brew'
 
   desc "build FORMULA", "Build a forumla"
   def build(formula)
@@ -33,7 +33,8 @@ class HerokuBrew::CLI < Thor
     filename = "#{formula}.tar.bz2"
 
     puts "Generating archive"
-    run("tar cjf #{filename} #{options[:prefix]}")
+    archive_base = options[:prefix].gsub(/^\/app\//, '')
+    run("tar cjf #{filename} #{archive_base}")
 
     puts "Uploading archive"
     AWS::S3::Base.establish_connection!(
