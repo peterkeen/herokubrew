@@ -1,5 +1,6 @@
 require 'thor'
 require 'tmpdir'
+require 'aws/s3'
 
 class HerokuBrew::CLI < Thor
 
