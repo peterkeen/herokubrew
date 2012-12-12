@@ -56,7 +56,7 @@ class HerokuBrew::CLI < Thor
       :access => :public_read
     )
 
-    puts "URL: http://#{ENV['AMAZON_BUCKET']}.s3.amazonaws.com/#{filename}"
+    puts "URL: http://#{ENV['AMAZON_BUCKET']}.s3.amazonaws.com/#{archive_filename}"
 
   end
 
