@@ -7,13 +7,18 @@ HerokuBrew is a build system for Heroku inspired by [Homebrew](https://github.co
 
 ## Usage
 
+First, create an Amazon S3 bucket. Then:
+
 ```
 $ git clone https://github.com/peterkeen/herokubrew
 $ cd herokubrew
 $ heroku create
 $ git push heroku master
+$ heroku config:add AMAZON_BUCKET=<bucket> AMAZON_ACCESS_KEY_ID=<key_id> AMAZON_SECRET_ACCESS_KEY=<key>
 $ heroku run brew build <formula name>
 ```
+
+HerokuBrew will upload the resulting archive to your S3 bucket and print the URL to stdout.
 
 ## Writing Formulas
 
