@@ -6,7 +6,7 @@ class HerokuBrew::CLI < Thor
 
   include HerokuBrew::Run
 
-  option :prefix, :type => :string, :default => '/app/.brew'
+  option :prefix, :type => :string, :default => '.brew'
 
   desc "build FORMULA", "Build a forumla"
   def build(formula)
