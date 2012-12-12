@@ -43,8 +43,11 @@ class HerokuBrew::CLI < Thor
       filename,
       File.open(filename),
       ENV['AMAZON_BUCKET'],
-      :content_type => 'application/x-bzip2'
+      :content_type => 'application/x-bzip2',
+      :access => :public_read
     )
+
+    puts "URL: http://#{ENV['AMAZON_BUCKET']}.s3.amazonaws.com/#{filename}"
 
   end
 
