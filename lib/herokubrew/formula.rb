@@ -1,5 +1,7 @@
 class HerokuBrew::Formula
 
+  include HerokuBrew::Run
+
   attr_reader :prefix
 
   class << self
@@ -71,10 +73,4 @@ class HerokuBrew::Formula
     end
   end
 
-  def run(*args)
-    unless system(*args)
-      exit $?.exitstatus || 1
-    end
-  end
-  
 end

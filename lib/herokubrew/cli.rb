@@ -3,6 +3,8 @@ require 'tmpdir'
 
 class HerokuBrew::CLI < Thor
 
+  include HerokuBrew::Run
+
   option :prefix, :type => :string, :default => '/app/.brew'
 
   desc "build FORMULA", "Build a forumla"
@@ -25,6 +27,24 @@ class HerokuBrew::CLI < Thor
 
     puts "Building #{formula}"
     form.build
+
+    filename = "#{formula}.tar.bz2"
+
+    puts "Generating archive"
+    run("tar cjf #{filename} #{options[:prefix]}")
+
+    puts "Uploading archive"
+    AWS::S3::Base.establish_connection(
+      :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY']
+    )
+
+    AWS::S3::S3Object.store(
+      filename,
+      File.open(filename),
+      ENV['AMAZON_BUCKET'],
+      :content_type => 'application/x-bzip2'
+    )
 
   end
 
