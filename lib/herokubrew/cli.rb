@@ -35,7 +35,7 @@ class HerokuBrew::CLI < Thor
     run("tar cjf #{filename} #{options[:prefix]}")
 
     puts "Uploading archive"
-    AWS::S3::Base.establish_connection(
+    AWS::S3::Base.establish_connection!(
       :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
       :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY']
     )
