@@ -63,10 +63,12 @@ $ heroku run brew build <formula name> --prefix=someprefix
 
 Formula file names map to classes like this:
 
-* Each string of alpha characters is capitalized
+* Each run of alphanumeric characters has the first character capitalized
 * Non-alphanumeric characters are stripped
 
-So, for example, the file `ruby-1.9.3-p327-falcon` maps to `Ruby193P327Falcon`.
+For example:
+`ruby-1.9.3-p327-falcon` maps to `Ruby193P327Falcon`.
+`libjeg-6b` maps to `Libjpeg6b`.
 
 ## Contributing
 
