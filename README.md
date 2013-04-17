@@ -31,9 +31,9 @@ class Libyaml < HerokuBrew::Formula
 end
 ```
 
-Formula use a simple DSL:
+Formulas use a simple DSL:
 
-* `url`: The URL of a tarball to fetch. This can either be a `.tar.gz` for a `.tar.bz2`.
+* `url`: The URL of a tarball to fetch. This can either be a `.tar.gz` or a `.tar.bz2`.
 * `basedir`: The directory that the tarball extracts into.
 * `depends`: The name of a formula to depend on. This can be specified multiple times.
 * `patch`: The URL of of a patch to apply after extracting the tarball. This will be fed to `patch -p1`
