@@ -14,7 +14,9 @@ class HerokuBrew::CLI < Thor
     form = HerokuBrew::Formula.load(formula, options[:prefix])
 
     deps = form.class.dependencies
-    unless deps.nil?
+    if deps.nil?
+      deps = []
+    else
       deps.dup.each do |dep|
         dep_formula = HerokuBrew::Formula.load(formula, options[:prefix])
         deps = (dep_formula.class.dependencies || []) + deps
