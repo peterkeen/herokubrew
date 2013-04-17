@@ -5,5 +5,5 @@ class Libjpeg6b < HerokuBrew::Formula
   # it requires a JS-enabled browser.
   # I've chosen a mirror that should be relatively close to US-East.
   url 'http://iweb.dl.sourceforge.net/project/libjpeg/libjpeg/6b/jpegsrc.v6b.tar.gz'
-  basedir 'jpegsrc.v6b'
+  basedir 'jpeg-6b'
 end
